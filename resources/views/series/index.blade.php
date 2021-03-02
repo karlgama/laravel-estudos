@@ -5,11 +5,16 @@ Séries
 @endsection
 
 @section('conteudo')
-<a href="/series/create" class="btn btn-dark mb-2">Adicionar</a>
+    @if(!empty($mensagem))
+        <div class="alert alert-success" role="alert">
+            {{ $mensagem }}
+        </div>
+    @endif
+    <a href="/series/create" class="btn btn-dark mb-2">Adicionar</a>
 
-<ul class="list-group">
-    @foreach ($series as $serie)
-    <li class="list-group-item">{{$serie->nome}}</li>
-    @endforeach
-</ul>
+    <ul class="list-group">
+        @foreach ($series as $serie)
+        <li class="list-group-item">{{$serie->nome}}</li>
+        @endforeach
+    </ul>
 @endsection
