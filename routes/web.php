@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/series','App\Http\Controllers\SeriesController@index');
-Route::get('/series/create','App\Http\Controllers\SeriesController@create');
-Route::post('/series/create','App\Http\Controllers\SeriesController@store');
+$controller= "App\\Http\\Controllers\\";
+Route::get('/series',$controller . 'SeriesController@index');
+Route::get('/series/create',$controller . 'SeriesController@create');
+Route::post('/series/create',$controller . 'SeriesController@store');
+Route::delete('/series/{id}', $controller . 'SeriesController@destroy');

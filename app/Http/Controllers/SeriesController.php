@@ -24,6 +24,9 @@ class SeriesController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nome'=>'required|min:2'
+        ]);
         //opção para escolher os parametros
 //        $serie = Serie::create([
 //            'nome'=>$nome
@@ -31,15 +34,23 @@ class SeriesController extends Controller
         //opção para salvar tudo que receber
         $serie = Serie::create($request->all());
 
-        if($serie){
-            $request->session()
-                ->flash(
-                    'mensagem',
-                    "Série: {$serie->id} criada com sucesso {$serie->nome}"
-                );
-            echo "Série cadastrada com sucesso, id: " . $serie->id;
-            return redirect('/series');
-        }
-        echo 'Impossível adicionar a sua série';
+        $request->session()
+            ->flash(
+                'mensagem',
+                "Série: {$serie->id} criada com sucesso {$serie->nome}"
+            );
+        return redirect('/series');
+
+    }
+
+    public function destroy(Request $request)
+    {
+        Serie::destroy($request->id);
+        $request->session()
+            ->flash(
+                'mensagem',
+                "Série removida com sucesso"
+            );
+        return redirect('/series');
     }
 }
