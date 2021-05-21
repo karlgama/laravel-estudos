@@ -21,3 +21,5 @@ Route::get('/series',$controller . 'SeriesController@index');
 Route::get('/series/create',$controller . 'SeriesController@create');
 Route::post('/series/create',$controller . 'SeriesController@store');
 Route::delete('/series/{id}', $controller . 'SeriesController@destroy');
+
+Route::get('/series/{serieId}/temporadas', $controller . 'TemporadasController@index');

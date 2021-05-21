@@ -30,7 +30,15 @@ class SeriesController extends Controller
 //            'nome'=>$nome
 //        ]);
         //opção para salvar tudo que receber
-        $serie = Serie::create($request->all());
+        $serie = Serie::create(['nome'=> $request->nome]);
+        $qtdTemporadas = $request->qtd_temporadas;
+        for ($i = 1; $i<= $qtdTemporadas; $i++){
+            $temporada = $serie->temporadas()->create(['numero' => $i]);
+            
+            for ($j=1;$j<=$request->ep_por_temporada; $j++){
+                $temporada->episodios()->create(['numero' =>$j]);
+            }
+        }
 
         $request->session()
             ->flash(
